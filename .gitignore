@@ -38,4 +38,5 @@ config.rst
 /.project
 /.pydevproject
 
+*.zip
 package-lock.json
