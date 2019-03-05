@@ -402,11 +402,13 @@ print('p-value = {:.10f}'.format(p_val))
 # * **z-test**   
 #-------------------------
 
+#%% [markdown]
+# t-score
 
 #%%
-#t-score
 t, p_val = stats.ttest_ind(male_sample, female_sample)
 print("t: {:.10f}, p-value: {:.10f}".format(t, p_val))
+
 
 #%% [markdown]
 # ==> Since p-value is smaller than the significance level 0.05, the null hypothesis is rejected. There exist difference in temperatures betwenn male and female.
