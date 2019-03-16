@@ -33,6 +33,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import bokeh.plotting as bkp
 from mpl_toolkits.axes_grid1 import make_axes_locatable
+from scipy import stats
 
 
 #%%
@@ -118,12 +119,44 @@ fig.tight_layout()
 
 
 #%%
-# Your turn
-
+clean_hospital_read_df_under100 = clean_hospital_read_df.loc[clean_hospital_read_df['Number of Discharges'] < 100]
+ratio_under100 = len(clean_hospital_read_df_under100['Number of Discharges'])/len(clean_hospital_read_df)*100
+clean_hospital_read_df_over1000 = clean_hospital_read_df.loc[clean_hospital_read_df['Number of Discharges'] > 1000]
+ratio_over1000 = len(clean_hospital_read_df_over1000)/len(clean_hospital_read_df)*100
+print("Sample numbers under 100: {:.2f}, over 1000: {:.2f}".format(ratio_under100, ratio_over1000))
 
 #%% [markdown]
 # B. Provide support for your arguments and your own recommendations with a statistically sound analysis:
-# 
+
+
+#%%
+# generate a scatterplot for number of discharges vs. excess rate of readmissions
+# lists work better with matplotlib scatterplot function
+
+# arhan: 'Number of Discharges' = 0 (index 0 - index 80)
+# arhan: exclude the last 3 rows (outlier?)
+x = [a for a in clean_hospital_read_df['Number of Discharges'][81:-3]]
+y = list(clean_hospital_read_df['Excess Readmission Ratio'][81:-3])
+
+fig, ax = plt.subplots(figsize=(8,5))
+ax.scatter(x, y,alpha=0.2)
+
+#arhan: max range 
+print(clean_hospital_read_df['Number of Discharges'].max())
+
+ax.fill_between([0,100], .5, 2, facecolor='blue', alpha = .15, interpolate=True)
+ax.fill_between([100,1000], .5, 2, facecolor='red', alpha = .15, interpolate=True)
+ax.fill_between([1000,7000], .5, 2, facecolor='blue', alpha = .15, interpolate=True)
+
+ax.set_xlim([0, max(x)])
+ax.set_xlabel('Number of discharges', fontsize=12)
+ax.set_ylabel('Excess rate of readmissions', fontsize=12)
+ax.set_title('Scatterplot of number of discharges vs. excess rate of readmissions', fontsize=14)
+
+ax.grid(True)
+fig.tight_layout()
+
+#%% [markdown]
 #    1. Setup an appropriate hypothesis test.
 #    2. Compute and report the observed significance value (or p-value).
 #    3. Report statistical significance for $\alpha$ = .01. 
@@ -137,4 +170,24 @@ fig.tight_layout()
 # + Markdown syntax: http://nestacms.com/docs/creating-content/markdown-cheat-sheet
 # ****
 
+df = clean_hospital_read_df
+#df.rename(columns={'Number of Discharges': 'discharges', 'Excess Readmission Ratio': 'excreadminratio'}, inplace=True)
+#sum(clean_hospital_read_df["Number of Discharges"][pd.isnull(clean_hospital_read_df["Excess Readmission Ratio"])] == 0)
+df = df[df["Excess Readmission Ratio"].notnull()]
+df = df[df["Number of Discharges"].notnull()]
 
+#%%
+df_lessthan_100 = df.loc[df["Number of Discharges"] < 100]
+print("hospitals/facilities with number of discharges < 100: ")
+print("mean excess readmission rate  {:.3f}".format(df_lessthan_100["Excess Readmission Ratio"].mean()))
+print("excess readmission rate > 1: {:.0f}%".format(sum(df_lessthan_100["Excess Readmission Ratio"] > 1)/len(df_lessthan_100)*100))
+
+df_greaterthan_1000 = df.loc[df["Number of Discharges"] > 1000]
+print("hospitals/facilities with number of discharges > 1000: ")
+print("mean excess readmission rate  {:.3f}".format(df_greaterthan_1000["Excess Readmission Ratio"].mean()))
+print("excess readmission rate > 1: {:.0f}%".format(sum(df_greaterthan_1000["Excess Readmission Ratio"] > 1)/len(df_greaterthan_1000)*100))
+
+
+#%%
+
+#%%
