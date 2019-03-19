@@ -95,9 +95,9 @@ def points_plot_prob(ax, Xtr, Xte, ytr, yte, clf, colorscale=cmap_light,
                            psize=psize, alpha=alpha, predicted=True) 
     Z = clf.predict_proba(np.c_[xx.ravel(), yy.ravel()])[:, 1]
     Z = Z.reshape(xx.shape)
-    plt.contourf(xx, yy, Z, cmap=ccolor, alpha=.2, axes=ax)
-    cs2 = plt.contour(xx, yy, Z, cmap=ccolor, alpha=.6, axes=ax)
-    plt.clabel(cs2, fmt = '%2.1f', colors = 'k', fontsize=14, axes=ax)
+    plt.contourf(xx, yy, Z, cmap=ccolor, alpha=.2)
+    cs2 = plt.contour(xx, yy, Z, cmap=ccolor, alpha=.6)
+    plt.clabel(cs2, fmt = '%2.1f', colors = 'k', fontsize=14)
     return ax 
 
 #%% [markdown]
