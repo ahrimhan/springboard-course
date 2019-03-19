@@ -314,7 +314,7 @@ def cv_optimize(clf, parameters, Xtrain, ytrain, n_folds=5):
 #%%
 from sklearn.model_selection import train_test_split
 
-def do_classify(clf, parameters, indf, featurenames, targetname, target1val, standardize=False, train_size=0.8):
+def do_classify(clf, parameters, indf, featurenames, targetname, target1val, standardize=False, train_size=0.8, test_size=0.2):
     subdf=indf[featurenames]
     if standardize:
         subdfstd=(subdf - subdf.mean())/subdf.std()
