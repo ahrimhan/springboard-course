@@ -1,4 +1,4 @@
-# springboard-course
+# Springboard Courses
 
 This repository contains the results performed during the Springboard data science career track course.
 
