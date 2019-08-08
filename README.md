@@ -24,7 +24,7 @@ The list of working files contain:
 * [Spark Mini-Project: Databricks edition](https://github.com/ahrimhan/springboard-course/blob/master/spark_Databricks/Spark_DF_SQL_ML_Exercise.ipynb)
 
 ## Take-home Challenges
-* [Relax Inc. ; Important features identifying Adopted Users.](https://github.com/ahrimhan/springboard-course/blob/master/take-home-challenge/relax_challenge/)
+* [Relax Inc.: Important features identifying Adopted Users](https://github.com/ahrimhan/springboard-course/blob/master/take-home-challenge/relax_challenge/)
 * [Ultimate Technologies Inc.](https://github.com/ahrimhan/springboard-course/blob/master/take-home-challenge/ultimate_challenge/)
 
 ## Job Findings
