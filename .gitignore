@@ -37,6 +37,6 @@ config.rst
 
 /.project
 /.pydevproject
-
+.vscode/
 *.zip
 package-lock.json
